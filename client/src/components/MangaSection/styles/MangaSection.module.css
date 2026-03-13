@@ -1,0 +1,797 @@
+.sectionLabel {
+  font-family: var(--font-title);
+  font-size: 18px;
+  letter-spacing: 5px;
+  color: var(--c-gold);
+  text-align: center;
+  padding: 28px 0 16px;
+  text-shadow: 2px 2px 0 var(--c-ink);
+}
+
+.mangaSection {
+  padding: 0 16px 100px;
+  max-width: 1000px;
+  margin: 0 auto;
+  position: relative;
+}
+
+.panel {
+  border: var(--border);
+  overflow: hidden;
+  position: relative;
+  background: var(--c-navy-mid);
+  box-shadow: 4px 4px 0 var(--c-ink);
+}
+
+.panelImg {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+  filter: contrast(1.05) saturate(1.1);
+  transition: transform 0.35s ease;
+}
+.panel:hover .panelImg {
+  transform: scale(1.04);
+}
+
+.panelCaption {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  background: var(--c-ink);
+  color: var(--c-white);
+  font-family: var(--font-title);
+  font-size: 11px;
+  letter-spacing: 2px;
+  padding: 5px 10px;
+  border-top: 2px solid var(--c-gold);
+  text-transform: uppercase;
+}
+
+.panelBadge {
+  position: absolute;
+  top: 8px;
+  right: 8px;
+  width: 28px;
+  height: 28px;
+  background: var(--c-gold);
+  color: var(--c-ink);
+  font-family: var(--font-title);
+  font-size: 16px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: 2px solid var(--c-ink);
+  box-shadow: 2px 2px 0 var(--c-ink);
+}
+
+.panelNum {
+  position: absolute;
+  bottom: 8px;
+  left: 10px;
+  font-family: var(--font-title);
+  font-size: 11px;
+  letter-spacing: 2px;
+  color: rgba(245, 240, 232, 0.35);
+  pointer-events: none;
+}
+
+.decorFloatCake {
+  position: absolute;
+  z-index: 10;
+  pointer-events: none;
+  filter: drop-shadow(0 8px 20px rgba(0, 0, 0, 0.7));
+  width: clamp(120px, 16vw, 200px);
+  top: 28%;
+  right: -6%;
+  animation: floatBob 3s ease-in-out infinite;
+}
+.decorFloatBalloons {
+  position: absolute;
+  z-index: 10;
+  pointer-events: none;
+  filter: drop-shadow(0 8px 20px rgba(0, 0, 0, 0.7));
+  width: clamp(110px, 15vw, 180px);
+  top: 62%;
+  left: -5%;
+  animation: floatBob 3.5s ease-in-out infinite reverse;
+}
+.decorFloatA {
+  position: absolute;
+  z-index: 10;
+  pointer-events: none;
+  filter: drop-shadow(0 8px 20px rgba(0, 0, 0, 0.7));
+  width: clamp(80px, 10vw, 130px);
+  top: -3%;
+  left: 28%;
+  animation: floatBob 4s ease-in-out infinite;
+}
+.decorFloatB {
+  position: absolute;
+  z-index: 10;
+  pointer-events: none;
+  filter: drop-shadow(0 8px 20px rgba(0, 0, 0, 0.7));
+  width: clamp(80px, 10vw, 130px);
+  top: -3%;
+  right: 28%;
+  animation: floatBob 4.5s ease-in-out infinite reverse;
+}
+.decorFloatC {
+  position: absolute;
+  z-index: 10;
+  pointer-events: none;
+  filter: drop-shadow(0 8px 20px rgba(0, 0, 0, 0.7));
+  width: clamp(70px, 9vw, 110px);
+  bottom: 13.5%;
+  left: 3%;
+  animation: floatBob 3.8s ease-in-out infinite;
+}
+.decorFloatD {
+  position: absolute;
+  z-index: 10;
+  pointer-events: auto;
+  filter: drop-shadow(0 8px 20px rgba(0, 0, 0, 0.7));
+  width: clamp(70px, 9vw, 110px);
+  bottom: 2%;
+  right: 5%;
+  animation:
+    floatBob 4.2s ease-in-out infinite reverse,
+    pulseGlow 3s ease-in-out infinite;
+  transition:
+    transform 0.2s,
+    filter 0.2s;
+}
+
+.dioActive {
+  animation:
+    floatBob 4.2s ease-in-out infinite reverse,
+    pulseGlowRed 1.5s ease-in-out infinite;
+}
+
+@keyframes pulseGlowRed {
+  0% {
+    filter: drop-shadow(0 0 0px rgba(255, 0, 0, 0)) brightness(1);
+  }
+
+  50% {
+    filter: drop-shadow(0 0 30px rgba(255, 0, 0, 0.8)) brightness(1.3);
+  }
+
+  100% {
+    filter: drop-shadow(0 0 0px rgba(255, 0, 0, 0)) brightness(1);
+  }
+}
+
+@keyframes pulseGlow {
+  0%,
+  100% {
+    filter: drop-shadow(0 8px 20px rgba(0, 0, 0, 0.7));
+  }
+  50% {
+    filter: drop-shadow(0 0 20px rgba(212, 160, 23, 0.5)) brightness(1.1);
+  }
+}
+
+@keyframes floatBob {
+  0%,
+  100% {
+    transform: translateY(0) rotate(0deg);
+  }
+  50% {
+    transform: translateY(-14px) rotate(2deg);
+  }
+}
+
+.mosaic {
+  display: flex;
+  flex-direction: column;
+  gap: var(--panel-gap);
+}
+
+.mRow {
+  display: flex;
+  gap: var(--panel-gap);
+  min-height: 280px;
+}
+
+.mPhoto {
+  flex: 1;
+  min-width: 0;
+}
+.mSpan2 {
+  flex: 2;
+}
+.mTall {
+  flex: 1;
+  min-height: 380px;
+}
+
+.mText {
+  flex: 0 0 clamp(200px, 30%, 280px);
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 14px;
+  padding: 24px 20px;
+  background: var(--c-navy-light);
+}
+.mTextDark {
+  background: var(--c-navy);
+}
+.mTextPurple {
+  background: #12103a;
+}
+.mTextGold {
+  background: #14100a;
+}
+.mTextFinal {
+  background: linear-gradient(160deg, #0f1628 0%, #1a0d2e 100%);
+  flex: 0 0 clamp(220px, 35%, 320px);
+}
+
+.chLabel {
+  font-family: var(--font-body);
+  font-weight: 700;
+  font-size: 10px;
+  letter-spacing: 4px;
+  text-transform: uppercase;
+  color: var(--c-gold);
+  border-left: 3px solid var(--c-gold);
+  padding-left: 8px;
+}
+
+.mHeadline {
+  font-family: var(--font-title);
+  font-size: clamp(24px, 3.5vw, 40px);
+  letter-spacing: 3px;
+  line-height: 1.2;
+  color: var(--c-white);
+  -webkit-text-stroke: 1px var(--c-ink);
+  paint-order: stroke fill;
+  text-shadow: 3px 3px 0 var(--c-ink);
+  margin: 0;
+}
+.mHeadlineLg {
+  font-family: var(--font-title);
+  font-size: clamp(24px, 3.5vw, 38px);
+  letter-spacing: 2px;
+  line-height: 1.2;
+  color: var(--c-gold-light);
+  -webkit-text-stroke: 1px var(--c-ink);
+  paint-order: stroke fill;
+  text-shadow: 3px 3px 0 var(--c-ink);
+  margin: 0;
+  overflow-wrap: break-word;
+  word-break: break-word;
+}
+
+.bubble {
+  background: var(--c-white);
+  color: var(--c-ink);
+  font-family: var(--font-body);
+  font-size: 12px;
+  line-height: 1.6;
+  padding: 11px 13px;
+  border: 2px solid var(--c-ink);
+  position: relative;
+  box-shadow: 3px 3px 0 var(--c-ink);
+}
+.bubble::before {
+  content: "";
+  position: absolute;
+  bottom: -10px;
+  left: 18px;
+  border: 8px solid transparent;
+  border-top-color: var(--c-ink);
+  border-bottom: none;
+}
+.bubble::after {
+  content: "";
+  position: absolute;
+  bottom: -5px;
+  left: 20px;
+  border: 6px solid transparent;
+  border-top-color: var(--c-white);
+  border-bottom: none;
+}
+.bubbleR::before {
+  left: auto;
+  right: 18px;
+}
+.bubbleR::after {
+  left: auto;
+  right: 20px;
+}
+
+.bubbleGold {
+  background: rgba(212, 160, 23, 0.12);
+  border-color: var(--c-gold);
+  color: var(--c-gold-light);
+  font-style: italic;
+}
+.bubbleGold::before {
+  border-top-color: var(--c-gold);
+  bottom: -8px;
+}
+.bubbleGold::after {
+  border-top-color: #2e230f;
+}
+
+.bubbleFinal {
+  background: var(--c-gold);
+  color: var(--c-ink);
+  font-weight: 700;
+  font-size: 13px;
+}
+.bubbleFinal::before {
+  border-top-color: var(--c-ink);
+}
+.bubbleFinal::after {
+  border-top-color: var(--c-gold);
+}
+
+.sfx {
+  font-family: "Noto Sans JP", sans-serif;
+  font-weight: 900;
+  font-size: clamp(18px, 2.5vw, 28px);
+  color: var(--c-purple-light);
+  opacity: 0.55;
+  letter-spacing: -2px;
+  margin: 0;
+  text-shadow: 1px 1px 0 var(--c-ink);
+}
+
+.sfxDivider {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 14px 0;
+  gap: 16px;
+}
+.sfxDivider::before,
+.sfxDivider::after {
+  content: "";
+  flex: 1;
+  height: 2px;
+  background: linear-gradient(to right, transparent, var(--c-gold));
+}
+.sfxDivider::after {
+  background: linear-gradient(to left, transparent, var(--c-gold));
+}
+
+.sfxDividerText {
+  font-family: var(--font-title);
+  font-size: clamp(22px, 4vw, 42px);
+  letter-spacing: 6px;
+  color: var(--c-white);
+  -webkit-text-stroke: 2px var(--c-ink);
+  paint-order: stroke fill;
+  text-shadow:
+    3px 3px 0 var(--c-purple),
+    5px 5px 0 var(--c-ink);
+  white-space: nowrap;
+}
+
+.mEpilogue {
+  aspect-ratio: 21/9;
+}
+.epilogueOverlay {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    to top,
+    rgba(10, 10, 18, 0.9) 0%,
+    transparent 55%
+  );
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-end;
+  padding: 28px;
+  gap: 6px;
+}
+.epilogueText {
+  font-family: var(--font-title);
+  font-size: clamp(24px, 4vw, 40px);
+  letter-spacing: 4px;
+  color: var(--c-gold-light);
+  text-shadow: 2px 2px 0 var(--c-ink);
+  margin: 0;
+}
+.epilogueSub {
+  font-family: var(--font-body);
+  font-size: 12px;
+  color: rgba(245, 240, 232, 0.5);
+  letter-spacing: 2px;
+  font-style: italic;
+  margin: 0;
+  text-align: center;
+}
+
+.dioDisabled {
+  opacity: 0.4;
+  filter: grayscale(1);
+  pointer-events: none;
+}
+
+.dioCooldown {
+  position: absolute;
+  bottom: 1.5%;
+  right: 4%;
+  width: clamp(70px, 9vw, 110px);
+  height: 3px;
+  background: rgba(255, 255, 255, 0.15);
+  z-index: 11;
+}
+
+.dioCooldownBar {
+  height: 100%;
+  background: var(--c-gold);
+  animation: cooldownDrain 3s linear forwards;
+}
+
+@keyframes cooldownDrain {
+  from {
+    width: 100%;
+  }
+  to {
+    width: 0%;
+  }
+}
+
+@media (max-width: 768px) {
+  .mRow {
+    min-height: 220px;
+  }
+  .mTall {
+    min-height: 300px;
+  }
+  .mText {
+    flex: 0 0 clamp(170px, 32%, 240px);
+    gap: 10px;
+    padding: 18px 14px;
+  }
+  .mTextFinal {
+    flex: 0 0 clamp(190px, 36%, 270px);
+  }
+  .mHeadline {
+    font-size: clamp(20px, 4vw, 32px);
+  }
+  .mHeadlineLg {
+    font-size: clamp(22px, 4.5vw, 36px);
+  }
+  .bubble {
+    font-size: 11px;
+    padding: 9px 11px;
+  }
+  .sfx {
+    font-size: clamp(14px, 2.5vw, 22px);
+  }
+  .decorFloatA {
+    top: -2%;
+    left: 29%;
+  }
+  .decorFloatB {
+    top: -2%;
+    left: 60%;
+  }
+  .decorFloatBalloons {
+    width: 225px;
+    left: 1%;
+    top: 61%;
+  }
+  .decorFloatCake {
+    width: 175px;
+    right: 1.5%;
+    top: 17.5%;
+  }
+  .decorFloatC {
+    width: 175px;
+    top: 83%;
+  }
+  .decorFloatD {
+    width: 150px;
+    top: 93%;
+    right: -1%;
+  }
+  .dioCooldown {
+    bottom: -2.5%;
+  }
+}
+
+@media (max-width: 640px) {
+  .mangaSection {
+    padding: 0 8px 80px;
+  }
+
+  .mRow {
+    flex-direction: row;
+    min-height: 0;
+    align-items: stretch;
+  }
+
+  .mPhoto {
+    flex: 1;
+    min-width: 0;
+    height: auto;
+    aspect-ratio: 3/4;
+  }
+  .mSpan2 {
+    flex: 2;
+    height: auto;
+    aspect-ratio: 3/4;
+  }
+  .mTall {
+    flex: 1;
+    height: auto;
+    min-height: 0;
+    aspect-ratio: 2/3;
+  }
+
+  .mText {
+    flex: 0 0 130px;
+    padding: 12px 10px;
+    gap: 8px;
+    height: auto;
+    align-self: stretch;
+  }
+  .mTextFinal {
+    flex: 0 0 145px;
+    align-self: stretch;
+  }
+
+  .chLabel {
+    font-size: 8px;
+    letter-spacing: 2px;
+  }
+  .mHeadline {
+    font-size: 18px;
+    letter-spacing: 1px;
+    -webkit-text-stroke: 0.5px var(--c-ink);
+  }
+  .mHeadlineLg {
+    font-size: 18px;
+    letter-spacing: 1px;
+    -webkit-text-stroke: 0.5px var(--c-ink);
+  }
+  .bubble {
+    font-size: 10px;
+    padding: 7px 8px;
+    line-height: 1.5;
+  }
+  .bubble::before {
+    border-width: 6px;
+    bottom: -8px;
+    left: 12px;
+  }
+  .bubble::after {
+    border-width: 5px;
+    bottom: -4px;
+    left: 14px;
+  }
+  .bubbleR::before {
+    left: auto;
+    right: 12px;
+  }
+  .bubbleR::after {
+    left: auto;
+    right: 14px;
+  }
+  .sfx {
+    font-size: 14px;
+  }
+
+  .mEpilogue {
+    aspect-ratio: 16/7;
+    height: auto;
+  }
+  .epilogueText {
+    font-size: clamp(16px, 4.5vw, 24px);
+  }
+  .epilogueSub {
+    font-size: 10px;
+  }
+
+  .decorFloatA {
+    top: -2%;
+    left: 26%;
+  }
+  .decorFloatB {
+    top: -2%;
+    left: 62%;
+  }
+  .decorFloatBalloons {
+    width: 185px;
+    left: -1%;
+    top: 63.5%;
+  }
+  .decorFloatCake {
+    width: 165px;
+    right: 1.5%;
+    top: 18.5%;
+  }
+  .decorFloatC {
+    width: 165px;
+    top: 87%;
+    left: 10%;
+  }
+  .decorFloatD {
+    width: 145px;
+    top: 93.5%;
+    right: -4%;
+  }
+  .dioCooldown {
+    bottom: -3.5%;
+  }
+}
+
+@media (max-width: 480px) {
+  .sectionLabel {
+    font-size: 14px;
+    letter-spacing: 3px;
+  }
+
+  .mRow {
+    min-height: 0;
+  }
+  .mPhoto {
+    aspect-ratio: 3/4;
+    height: auto;
+  }
+  .mSpan2 {
+    aspect-ratio: 3/4;
+    height: auto;
+  }
+  .mTall {
+    aspect-ratio: 2/3;
+    height: auto;
+  }
+
+  .mText {
+    flex: 0 0 120px;
+    padding: 10px 8px;
+    gap: 6px;
+  }
+  .mTextFinal {
+    flex: 0 0 130px;
+  }
+  .mHeadline {
+    font-size: 16px;
+  }
+  .mHeadlineLg {
+    font-size: 16px;
+  }
+  .bubble {
+    font-size: 9.5px;
+    padding: 6px 7px;
+  }
+
+  .sfxDividerText {
+    font-size: clamp(18px, 5vw, 28px);
+    letter-spacing: 3px;
+  }
+  .mEpilogue {
+    aspect-ratio: 16/7;
+  }
+  .bubbleGold::before {
+    border-top-color: var(--c-gold);
+    bottom: -7px;
+    left: 13.5px;
+  }
+
+  .decorFloatA {
+    top: -4.5%;
+    left: 16%;
+  }
+  .decorFloatB {
+    top: -4.5%;
+    left: 62%;
+  }
+  .decorFloatBalloons {
+    width: 165px;
+    left: 1%;
+    top: 61.5%;
+  }
+  .decorFloatCake {
+    width: 125px;
+    right: 3%;
+    top: 18.5%;
+  }
+  .decorFloatC {
+    width: 125px;
+    top: 85.2%;
+    left: 10%;
+  }
+  .decorFloatD {
+    width: 115px;
+    top: 92%;
+    right: -1%;
+  }
+  .epilogueOverlay {
+    padding: 38px 28px 10px 28px;
+    gap: 6px;
+  }
+  .dioCooldown {
+    bottom: -2.1%;
+  }
+}
+
+@media (max-width: 360px) {
+  .mangaSection {
+    padding: 0 6px 60px;
+  }
+
+  .mPhoto {
+    aspect-ratio: 3/4;
+    height: auto;
+  }
+  .mSpan2 {
+    aspect-ratio: 3/4;
+    height: auto;
+  }
+  .mTall {
+    aspect-ratio: 2/3;
+    height: auto;
+  }
+
+  .mText {
+    flex: 0 0 105px;
+    padding: 8px 7px;
+    gap: 5px;
+  }
+  .mTextFinal {
+    flex: 0 0 115px;
+  }
+  .mHeadline,
+  .mHeadlineLg {
+    font-size: 14px;
+    letter-spacing: 0.5px;
+  }
+  .bubble {
+    font-size: 9px;
+    padding: 5px 6px;
+  }
+  .sfxDividerText {
+    letter-spacing: 2px;
+  }
+
+  .bubbleGold::before {
+    border-top-color: var(--c-gold);
+    bottom: -7px;
+    left: 13px;
+  }
+
+  .decorFloatA {
+    top: -7%;
+    left: 12%;
+  }
+  .decorFloatB {
+    top: -7%;
+    left: 62%;
+  }
+  .decorFloatBalloons {
+    width: 145px;
+    left: 3%;
+    top: 61%;
+  }
+  .decorFloatCake {
+    width: 75px;
+    right: 3%;
+    top: 19%;
+  }
+  .decorFloatC {
+    width: 110px;
+    top: 85.5%;
+    left: 12%;
+  }
+  .decorFloatD {
+    width: 95px;
+    top: 92%;
+    right: -6%;
+  }
+  .dioCooldown {
+    bottom: -1.5%;
+  }
+}

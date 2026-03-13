@@ -1,0 +1,37 @@
+@import url("https://fonts.googleapis.com/css2?family=Oswald:wght@700&family=Noto+Sans+JP:wght@400;700;900&family=M+PLUS+Rounded+1c:wght@400;700;900&display=swap");
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+:root {
+  --c-navy: #0d1b3e;
+  --c-navy-mid: #162040;
+  --c-navy-light: #1e2d5a;
+  --c-gold: #d4a017;
+  --c-gold-light: #f0c040;
+  --c-purple: #6b3fa0;
+  --c-purple-light: #9b6fd4;
+  --c-red: #c0392b;
+  --c-white: #f5f0e8;
+  --c-ink: #0a0a12;
+  --border: 3px solid var(--c-ink);
+  --panel-gap: 6px;
+  --font-title: "Oswald", "Noto Sans JP", sans-serif;
+  --font-body: "M PLUS Rounded 1c", "Noto Sans JP", sans-serif;
+  --skeleton-base: #1e2d5a;
+  --skeleton-highlight: #3b4e87;
+}
+
+.root {
+  box-sizing: border-box;
+  background: var(--c-navy);
+  color: var(--c-white);
+  font-family: var(--font-body);
+  min-height: 100vh;
+  overflow-x: hidden;
+  position: relative;
+  width: 100%;
+}
