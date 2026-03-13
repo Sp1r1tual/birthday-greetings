@@ -3,8 +3,8 @@ import { ConfigModule, ConfigService } from '@nestjs/config';
 import { MongooseModule } from '@nestjs/mongoose';
 import { ThrottlerModule } from '@nestjs/throttler';
 
-import { GreetingsModule } from './greetings/greetings.module';
-import { validateEnv } from './common/configs/env.validation';
+import { GreetingsModule } from './greetings/greetings.module.js';
+import { validateEnv } from './common/configs/env.validation.js';
 
 @Module({
   imports: [

@@ -1,23 +1,53 @@
 import { NestFactory } from '@nestjs/core';
 import { ConfigService } from '@nestjs/config';
+import { NestExpressApplication } from '@nestjs/platform-express';
+import { ExpressAdapter } from '@nestjs/platform-express';
+import express, { Express, Request, Response } from 'express';
+import { IncomingMessage, ServerResponse } from 'http';
 
-import { AppModule } from 'src/app.module';
+import { AppModule } from './app.module';
 
-async function bootstrap(): Promise<void> {
-  const app = await NestFactory.create(AppModule);
+let cachedApp: Express;
+
+async function createApp(): Promise<Express> {
+  if (cachedApp) return cachedApp;
+
+  const expressApp = express();
+  const adapter = new ExpressAdapter(expressApp);
+
+  const app = await NestFactory.create<NestExpressApplication>(
+    AppModule,
+    adapter,
+  );
 
   const configService = app.get(ConfigService);
-
-  const port = configService.get<number>('PORT') ?? 5000;
-  const clientUrl =
-    configService.get<string>('CLIENT_URL') ?? 'http://localhost:5173';
+  const clientUrl = configService.get<string>('CLIENT_URL');
 
   app.enableCors({
     origin: clientUrl,
     credentials: true,
   });
 
-  await app.listen(port);
+  await app.init();
+
+  cachedApp = expressApp;
+  return cachedApp;
 }
 
-void bootstrap();
+// Serverless handler (Vercel)
+export default async (
+  req: IncomingMessage | Request,
+  res: ServerResponse | Response,
+): Promise<void> => {
+  const app = await createApp();
+  app(req as Request, res as Response);
+};
+
+if (process.env.NODE_ENV !== 'production') {
+  void createApp().then((expressApp) => {
+    const port = process.env.PORT ?? 5000;
+    expressApp.listen(port, () => {
+      console.log(`Server running on http://localhost:${port}`);
+    });
+  });
+}
