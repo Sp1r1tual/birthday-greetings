@@ -41,8 +41,8 @@ export const MangaSection = () => {
 
   const handleDioClick = () => {
     if (isSfxPlaying) return;
-    const duration = isTimeStop ? 2500 : 5500;
-    setCooldownDuration(isTimeStop ? "2.5s" : "5.5s");
+    const duration = isTimeStop ? 1700 : 5500;
+    setCooldownDuration(isTimeStop ? "1.7s" : "5.5s");
 
     document.body.style.overflow = "hidden";
     setTimeout(() => {

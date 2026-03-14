@@ -53,7 +53,7 @@ export const AudioProvider = ({ children }: { children: ReactNode }) => {
   }, [startAudio]);
 
   const toggleMute = useCallback(() => {
-    if (isSfxPlaying) return;
+    if (isSfxPlaying || isTimeStop) return;
     if (!audioStateRef.current) {
       audioStateRef.current = startAudio();
       if (navigator.vibrate) navigator.vibrate([50, 30, 50]);
@@ -73,7 +73,7 @@ export const AudioProvider = ({ children }: { children: ReactNode }) => {
       setMuted(false);
     }
     setIsTimeStop(false);
-  }, [muted, startAudio, isSfxPlaying]);
+  }, [muted, startAudio, isSfxPlaying, isTimeStop]);
 
   const playZaWarudo = useCallback(() => {
     if (isSfxPlaying) return;
@@ -85,11 +85,10 @@ export const AudioProvider = ({ children }: { children: ReactNode }) => {
       setIsSfxPlaying(true);
       const sfx = new Audio(zaWarudoSfx);
       sfx.volume = 0.8;
-      sfx.onended = () => setIsSfxPlaying(false);
-      sfx.play().catch(() => setIsSfxPlaying(false));
+      sfx.play().catch(() => {});
 
       if (sfxResetTimerRef.current) clearTimeout(sfxResetTimerRef.current);
-      sfxResetTimerRef.current = setTimeout(() => setIsSfxPlaying(false), 2500);
+      sfxResetTimerRef.current = setTimeout(() => setIsSfxPlaying(false), 5500);
       return;
     }
 
@@ -112,8 +111,7 @@ export const AudioProvider = ({ children }: { children: ReactNode }) => {
       zaWarudoTimerRef.current = setTimeout(() => {
         const sfx = new Audio(zaWarudoSfx);
         sfx.volume = 0.8;
-        sfx.onended = () => setIsSfxPlaying(false);
-        sfx.play().catch(() => setIsSfxPlaying(false));
+        sfx.play().catch(() => {});
       }, 100);
 
       if (sfxResetTimerRef.current) clearTimeout(sfxResetTimerRef.current);
@@ -122,11 +120,10 @@ export const AudioProvider = ({ children }: { children: ReactNode }) => {
       setIsSfxPlaying(true);
       const sfx = new Audio(zaWarudoUnfreezeSfx);
       sfx.volume = 0.8;
-      sfx.onended = () => setIsSfxPlaying(false);
-      sfx.play().catch(() => setIsSfxPlaying(false));
+      sfx.play().catch(() => {});
 
       if (sfxResetTimerRef.current) clearTimeout(sfxResetTimerRef.current);
-      sfxResetTimerRef.current = setTimeout(() => setIsSfxPlaying(false), 2500);
+      sfxResetTimerRef.current = setTimeout(() => setIsSfxPlaying(false), 1700);
 
       if (navigator.vibrate) {
         navigator.vibrate([50, 100, 50]);
@@ -139,7 +136,6 @@ export const AudioProvider = ({ children }: { children: ReactNode }) => {
         gain.gain.linearRampToValueAtTime(0.35, ctx.currentTime + 1.2);
         setMuted(false);
         setIsTimeStop(false);
-        setIsSfxPlaying(false);
       }, 1700);
     }
   }, [isTimeStop, startAudio, isSfxPlaying]);

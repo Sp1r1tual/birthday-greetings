@@ -23,7 +23,10 @@ export const Hero = () => {
   const bannerSrc = isTimeStop ? DECOR.easterEgg : DECOR.poster;
 
   return (
-    <section ref={heroRef} className={styles.hero}>
+    <section
+      ref={heroRef}
+      className={`${styles.hero} ${isTimeStop ? styles.timeStop : ""}`}
+    >
       <div className={styles.speedLines} aria-hidden />
       <img src={DECOR.emoji} className={styles.sfxLeft} alt="" aria-hidden />
       <img src={DECOR.emoji} className={styles.sfxRight} alt="" aria-hidden />

@@ -34,4 +34,11 @@
   overflow-x: hidden;
   position: relative;
   width: 100%;
+  transition:
+    background 0.8s ease,
+    filter 0.8s ease;
+}
+
+.timeStop {
+  background: #2a2a2a;
 }

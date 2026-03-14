@@ -34,11 +34,14 @@ export const useMangaNoise = (
       draw();
 
       setTimeout(() => {
-        if (noiseRef.current) {
-          cancelAnimationFrame(noiseRef.current);
-          noiseRef.current = null;
-        }
         canvas.style.opacity = "0";
+        // Stop animation ONLY after the transition (0.3s) finishes
+        setTimeout(() => {
+          if (noiseRef.current) {
+            cancelAnimationFrame(noiseRef.current);
+            noiseRef.current = null;
+          }
+        }, 300);
       }, duration);
     },
     [canvasRef],

@@ -50,6 +50,15 @@
     var(--c-navy) 100%
   );
   border-bottom: 4px solid var(--c-gold);
+  transition: background 0.8s ease;
+}
+
+.timeStop {
+  background: radial-gradient(
+    ellipse 80% 70% at 50% 40%,
+    #3a3a3a 0%,
+    #2a2a2a 100%
+  );
 }
 
 .speedLines {

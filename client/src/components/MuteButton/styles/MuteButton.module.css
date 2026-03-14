@@ -38,3 +38,10 @@
     font-size: 15px;
   }
 }
+
+.disabled {
+  opacity: 0.5;
+  filter: grayscale(1);
+  cursor: default;
+  pointer-events: none;
+}

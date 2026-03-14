@@ -17,7 +17,7 @@ import styles from "./App.module.css";
 export const App = () => {
   const [opened, setOpened] = useState(false);
   const [showStamp, setShowStamp] = useState(false);
-  const { muted, toggleMute, handleAudioStart } = useAudioContext();
+  const { muted, toggleMute, handleAudioStart, isTimeStop } = useAudioContext();
 
   useEffect(() => {
     if ("scrollRestoration" in window.history) {
@@ -45,10 +45,14 @@ export const App = () => {
           <Opening onDone={handleOpened} onAudioStart={handleAudioStart} />
         )}
 
-        <div className={styles.root}>
+        <div className={`${styles.root} ${isTimeStop ? styles.timeStop : ""}`}>
           <div className={styles.noise} aria-hidden />
 
-          <MuteButton muted={muted} onToggle={toggleMute} />
+          <MuteButton
+            muted={muted}
+            onToggle={toggleMute}
+            isDisabled={isTimeStop}
+          />
 
           <Hero />
           <MangaSection />
