@@ -1,12 +1,13 @@
+import { CONTENT } from "@/common/constants/content";
 import styles from "./styles/Footer.module.css";
 
 export const Footer = () => {
   return (
     <footer className={styles.footer}>
-      <p>BIRTHDAY CHRONICLES · VOL.1 · СПЕЦІАЛЬНИЙ ВИПУСК</p>
+      <p>{CONTENT.FOOTER.CHRONICLES}</p>
 
       <div className={styles.linksWrapper}>
-        <p className={styles.footerSub}>Продовження y наступній главі ↓</p>
+        <p className={styles.footerSub}>{CONTENT.FOOTER.SUBTITLE}</p>
 
         <a
           className={styles.footerLink}
@@ -14,7 +15,7 @@ export const Footer = () => {
           target="_blank"
           rel="noopener noreferrer"
         >
-          Відкритий код на GitHub
+          {CONTENT.FOOTER.GITHUB_LINK}
         </a>
       </div>
     </footer>

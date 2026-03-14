@@ -1,4 +1,5 @@
 import { DECOR } from "@/common/constants/assets";
+import { CONTENT } from "@/common/constants/content";
 
 import styles from "./styles/Stamp.module.css";
 
@@ -13,7 +14,7 @@ export const Stamp = ({ show }: IStampProps) => {
     <div className={styles.stampWrapper}>
       <div className={styles.stamp}>
         <img src={DECOR.cake} className={styles.stampCake} alt="" aria-hidden />
-        <span>З ДНЕМ НАРОДЖЕННЯ!</span>
+        <span>{CONTENT.STAMP.TEXT}</span>
       </div>
     </div>
   );

@@ -28,6 +28,9 @@ export const Opening = ({ onDone, onAudioStart }: IAnimeOpeningProps) => {
   const [exiting, setExiting] = useState(false);
   const [titleText, setTitleText] = useState("");
   const typingRef = useRef<ReturnType<typeof setTimeout> | null>(null);
+  const flashTimerRef = useRef<ReturnType<typeof setTimeout> | null>(null);
+  const exitTimerRef = useRef<ReturnType<typeof setTimeout> | null>(null);
+  const doneTimerRef = useRef<ReturnType<typeof setTimeout> | null>(null);
 
   const typeTitle = useCallback((target: string) => {
     if (typingRef.current) clearTimeout(typingRef.current);
@@ -47,14 +50,15 @@ export const Opening = ({ onDone, onAudioStart }: IAnimeOpeningProps) => {
     document.body.style.overflow = "hidden";
     return () => {
       document.body.style.overflow = "";
+      if (typingRef.current) clearTimeout(typingRef.current);
+      if (flashTimerRef.current) clearTimeout(flashTimerRef.current);
+      if (exitTimerRef.current) clearTimeout(exitTimerRef.current);
+      if (doneTimerRef.current) clearTimeout(doneTimerRef.current);
     };
   }, []);
 
   useEffect(() => {
     typeTitle(EPISODE_TITLES[0]);
-    return () => {
-      if (typingRef.current) clearTimeout(typingRef.current);
-    };
   }, [typeTitle]);
 
   useEffect(() => {
@@ -84,7 +88,8 @@ export const Opening = ({ onDone, onAudioStart }: IAnimeOpeningProps) => {
     click.play().catch(() => {});
 
     setFlash(true);
-    setTimeout(() => setFlash(false), 300);
+    if (flashTimerRef.current) clearTimeout(flashTimerRef.current);
+    flashTimerRef.current = setTimeout(() => setFlash(false), 300);
 
     if (nextStep === 3) {
       onAudioStart();
@@ -98,16 +103,21 @@ export const Opening = ({ onDone, onAudioStart }: IAnimeOpeningProps) => {
       sfx.volume = 0.7;
       sfx.play().catch(() => {});
 
-      setTimeout(() => {
+      if (exitTimerRef.current) clearTimeout(exitTimerRef.current);
+      exitTimerRef.current = setTimeout(() => {
         setExiting(true);
-        setTimeout(onDone, 650);
+        if (doneTimerRef.current) clearTimeout(doneTimerRef.current);
+        doneTimerRef.current = setTimeout(onDone, 650);
       }, 1100);
     }
   }, [step, exiting, onDone, onAudioStart, typeTitle]);
 
   useEffect(() => {
     const onKey = (e: KeyboardEvent) => {
-      if (e.key === "Enter" || e.key === " ") handleClick();
+      if (e.key === "Enter" || e.key === " ") {
+        e.preventDefault();
+        handleClick();
+      }
     };
     window.addEventListener("keydown", onKey);
     return () => window.removeEventListener("keydown", onKey);
@@ -192,13 +202,22 @@ export const Opening = ({ onDone, onAudioStart }: IAnimeOpeningProps) => {
           {titleText}
         </p>
 
-        <div className={styles.progressWrap}>
+        <div
+          className={styles.progressWrap}
+          role="progressbar"
+          aria-valuenow={pct}
+          aria-valuemin={0}
+          aria-valuemax={100}
+          aria-label={`Завантаження системи: ${pct}%`}
+        >
           <div className={styles.progressTrack}>
             <div className={styles.progressFill} style={{ width: `${pct}%` }} />
           </div>
           <div className={styles.progressMeta}>
             <span className={styles.progressPct}>{pct}%</span>
-            <span className={styles.progressStatus}>{currentStatus}</span>
+            <span className={styles.progressStatus} aria-live="polite">
+              {currentStatus}
+            </span>
           </div>
         </div>
 

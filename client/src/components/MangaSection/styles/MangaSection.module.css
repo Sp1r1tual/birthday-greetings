@@ -6,6 +6,10 @@
   text-align: center;
   padding: 28px 0 16px;
   text-shadow: 2px 2px 0 var(--c-ink);
+  transition:
+    transform 1.2s cubic-bezier(0.19, 1, 0.22, 1),
+    opacity 1.2s ease,
+    filter 1.2s ease;
 }
 
 .mangaSection {
@@ -21,6 +25,32 @@
   position: relative;
   background: var(--c-navy-mid);
   box-shadow: 4px 4px 0 var(--c-ink);
+  transition:
+    transform 0.7s cubic-bezier(0.175, 0.885, 0.32, 1.275),
+    opacity 0.7s ease,
+    filter 0.7s ease;
+}
+
+.revealHidden {
+  opacity: 0;
+  transform: scale(0.9) translateY(40px) skewX(-2deg);
+  filter: blur(2px);
+  pointer-events: none;
+}
+
+.revealVisible {
+  opacity: 1;
+  transform: scale(1) translateY(0) skewX(0);
+  filter: blur(0);
+  pointer-events: auto;
+}
+
+.revealFromLeft {
+  transform: translateX(-60px) rotate(-2deg);
+}
+
+.revealFromRight {
+  transform: translateX(60px) rotate(2deg);
 }
 
 .panelImg {
@@ -92,8 +122,10 @@
   width: clamp(120px, 16vw, 200px);
   top: 28%;
   right: -6%;
-  animation: floatBob 3s ease-in-out infinite;
   will-change: transform;
+}
+.decorFloatCake img {
+  animation: floatBob 3s ease-in-out infinite;
 }
 .decorFloatBalloons {
   position: absolute;
@@ -103,8 +135,10 @@
   width: clamp(110px, 15vw, 180px);
   top: 62%;
   left: -5%;
-  animation: floatBob 3.5s ease-in-out infinite reverse;
   will-change: transform;
+}
+.decorFloatBalloons img {
+  animation: floatBob 3.5s ease-in-out infinite reverse;
 }
 .decorFloatA {
   position: absolute;
@@ -114,8 +148,10 @@
   width: clamp(80px, 10vw, 130px);
   top: -3%;
   left: 28%;
-  animation: floatBob 4s ease-in-out infinite;
   will-change: transform;
+}
+.decorFloatA img {
+  animation: floatBob 4s ease-in-out infinite;
 }
 .decorFloatB {
   position: absolute;
@@ -125,8 +161,10 @@
   width: clamp(80px, 10vw, 130px);
   top: -3%;
   right: 28%;
-  animation: floatBob 4.5s ease-in-out infinite reverse;
   will-change: transform;
+}
+.decorFloatB img {
+  animation: floatBob 4.5s ease-in-out infinite reverse;
 }
 .decorFloatC {
   position: absolute;
@@ -136,8 +174,10 @@
   width: clamp(70px, 9vw, 110px);
   bottom: 13.5%;
   left: 3%;
-  animation: floatBob 3.8s ease-in-out infinite;
   will-change: transform;
+}
+.decorFloatC img {
+  animation: floatBob 3.8s ease-in-out infinite;
 }
 .decorFloatD {
   position: absolute;
@@ -147,16 +187,18 @@
   width: clamp(70px, 9vw, 110px);
   bottom: 2%;
   right: 5%;
-  animation:
-    floatBob 4.2s ease-in-out infinite reverse,
-    pulseGlow 3s ease-in-out infinite;
   transition:
     transform 0.2s,
     filter 0.2s;
   will-change: transform;
 }
+.decorFloatD img {
+  animation:
+    floatBob 4.2s ease-in-out infinite reverse,
+    pulseGlow 3s ease-in-out infinite;
+}
 
-.dioActive {
+.dioActive img {
   animation:
     floatBob 4.2s ease-in-out infinite reverse,
     pulseGlowRed 1.5s ease-in-out infinite;
@@ -368,9 +410,20 @@
   flex: 1;
   height: 2px;
   background: linear-gradient(to right, transparent, var(--c-gold));
+  transform: scaleX(0);
+  transition: transform 1s cubic-bezier(0.19, 1, 0.22, 1);
+}
+.sfxDivider::before {
+  transform-origin: left;
 }
 .sfxDivider::after {
   background: linear-gradient(to left, transparent, var(--c-gold));
+  transform-origin: right;
+}
+
+.sfxLinesVisible::before,
+.sfxLinesVisible::after {
+  transform: scaleX(1);
 }
 
 .sfxDividerText {
@@ -384,6 +437,19 @@
     3px 3px 0 var(--c-purple),
     5px 5px 0 var(--c-ink);
   white-space: nowrap;
+  transition:
+    transform 0.7s cubic-bezier(0.175, 0.885, 0.32, 1.275),
+    opacity 0.7s ease;
+}
+
+.sfxHidden {
+  opacity: 0;
+  transform: scale(1.5) rotate(5deg);
+}
+
+.sfxVisible {
+  opacity: 1;
+  transform: scale(1) rotate(0deg);
 }
 
 .mEpilogue {
@@ -598,6 +664,8 @@
   .mEpilogue {
     aspect-ratio: 16/7;
     height: auto;
+    width: 100%;
+    margin: 0 auto;
   }
   .epilogueText {
     font-size: clamp(16px, 4.5vw, 24px);
@@ -637,6 +705,24 @@
   .dioCooldown {
     bottom: -3.5%;
   }
+}
+
+.decorItem {
+  transition:
+    transform 0.8s cubic-bezier(0.175, 0.885, 0.32, 1.275),
+    opacity 0.8s ease;
+}
+
+.decorHidden {
+  opacity: 0 !important;
+  transform: scale(0.2) rotate(-20deg) !important;
+  pointer-events: none;
+}
+
+.decorVisible {
+  opacity: 1 !important;
+  transform: scale(1) rotate(0deg) !important;
+  pointer-events: auto;
 }
 
 @media (max-width: 480px) {
@@ -686,6 +772,8 @@
   }
   .mEpilogue {
     aspect-ratio: 16/7;
+    width: 100%;
+    margin: 0 auto;
   }
   .bubbleGold::before {
     border-top-color: var(--c-gold);
@@ -746,6 +834,12 @@
   .mTall {
     aspect-ratio: 2/3;
     height: auto;
+  }
+  .mEpilogue {
+    aspect-ratio: 21/9;
+    height: auto;
+    width: 100%;
+    margin: 0 auto;
   }
 
   .mText {

@@ -6,7 +6,7 @@ import { useAudioContext } from "./contexts/AudioContext";
 import { Opening } from "./components/Opening/Opening";
 import { Hero } from "./components/Hero/Hero";
 import { MangaSection } from "./components/MangaSection/MangaSection";
-import { GreetingsSection } from "./components/PetitionSection/GreetingsSection";
+import { GreetingsSection } from "./components/GreetingsSection/GreetingsSection";
 import { Stamp } from "./components/Stamp/Stamp";
 import { Footer } from "./components/Footer/Footer";
 import { MuteButton } from "./components/MuteButton/MuteButton";
