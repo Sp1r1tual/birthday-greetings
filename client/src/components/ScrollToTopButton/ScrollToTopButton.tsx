@@ -15,7 +15,7 @@ export const ScrollToTopButton = () => {
     <button
       className={`${styles.toTopBtn} ${showTop ? styles.toTopBtnVisible : ""}`}
       onClick={() => {
-        if (navigator.vibrate) navigator.vibrate(30);
+        if (navigator.vibrate) navigator.vibrate([50, 30, 50]);
         window.scrollTo({ top: 0, behavior: "smooth" });
       }}
       aria-label="Нагору"

@@ -1,4 +1,6 @@
-import { useRef, useState } from "react";
+import { useRef, useState, useEffect } from "react";
+import Skeleton from "react-loading-skeleton";
+import "react-loading-skeleton/dist/skeleton.css";
 
 import { PHOTOS, DECOR } from "@/common/constants/assets";
 import { useAudioContext } from "@/contexts/AudioContext";
@@ -10,6 +12,23 @@ export const MangaSection = () => {
   const canvasRef = useRef<HTMLCanvasElement>(null);
   const noiseRef = useRef<number | null>(null);
   const [cooldownDuration, setCooldownDuration] = useState<string>("4s");
+  const [loadedImages, setLoadedImages] = useState<Record<number, boolean>>({});
+
+  const handleImageLoad = (index: number) => {
+    setLoadedImages((prev) => ({ ...prev, [index]: true }));
+  };
+
+  useEffect(() => {
+    const handleResize = () => {
+      const canvas = canvasRef.current;
+      if (canvas) {
+        canvas.width = window.innerWidth;
+        canvas.height = window.innerHeight;
+      }
+    };
+    window.addEventListener("resize", handleResize);
+    return () => window.removeEventListener("resize", handleResize);
+  }, []);
 
   const playNoise = (duration: number) => {
     const canvas = canvasRef.current;
@@ -19,14 +38,18 @@ export const MangaSection = () => {
     const ctx = canvas.getContext("2d");
     if (!ctx) return;
 
+    const w = canvas.width;
+    const h = canvas.height;
+    const imageData = ctx.createImageData(w, h);
+    const data = imageData.data;
+
     const draw = () => {
-      const imageData = ctx.createImageData(canvas.width, canvas.height);
-      for (let i = 0; i < imageData.data.length; i += 4) {
+      for (let i = 0; i < data.length; i += 4) {
         const v = Math.random() * 255;
-        imageData.data[i] = v;
-        imageData.data[i + 1] = v;
-        imageData.data[i + 2] = v;
-        imageData.data[i + 3] = 180;
+        data[i] = v;
+        data[i + 1] = v;
+        data[i + 2] = v;
+        data[i + 3] = 180;
       }
       ctx.putImageData(imageData, 0, 0);
       noiseRef.current = requestAnimationFrame(draw);
@@ -117,7 +140,18 @@ export const MangaSection = () => {
       <div className={styles.mosaic}>
         <div className={styles.mRow}>
           <div className={`${styles.panel} ${styles.mPhoto} ${styles.mSpan2}`}>
-            <img src={PHOTOS[0]} alt="фото 1" className={styles.panelImg} />
+            {!loadedImages[0] && (
+              <div className={styles.panelSkeleton}>
+                <Skeleton height="100%" />
+              </div>
+            )}
+            <img
+              src={PHOTOS[0]}
+              alt="фото 1"
+              className={styles.panelImg}
+              onLoad={() => handleImageLoad(0)}
+              style={{ opacity: loadedImages[0] ? 1 : 0 }}
+            />
             <div className={styles.panelNum}>01</div>
           </div>
           <div className={`${styles.panel} ${styles.mText}`}>
@@ -151,11 +185,33 @@ export const MangaSection = () => {
             </div>
           </div>
           <div className={`${styles.panel} ${styles.mPhoto}`}>
-            <img src={PHOTOS[1]} alt="фото 2" className={styles.panelImg} />
+            {!loadedImages[1] && (
+              <div className={styles.panelSkeleton}>
+                <Skeleton height="100%" />
+              </div>
+            )}
+            <img
+              src={PHOTOS[1]}
+              alt="фото 2"
+              className={styles.panelImg}
+              onLoad={() => handleImageLoad(1)}
+              style={{ opacity: loadedImages[1] ? 1 : 0 }}
+            />
             <div className={styles.panelNum}>02</div>
           </div>
           <div className={`${styles.panel} ${styles.mPhoto}`}>
-            <img src={PHOTOS[2]} alt="фото 3" className={styles.panelImg} />
+            {!loadedImages[2] && (
+              <div className={styles.panelSkeleton}>
+                <Skeleton height="100%" />
+              </div>
+            )}
+            <img
+              src={PHOTOS[2]}
+              alt="фото 3"
+              className={styles.panelImg}
+              onLoad={() => handleImageLoad(2)}
+              style={{ opacity: loadedImages[2] ? 1 : 0 }}
+            />
             <div className={styles.panelCaption}>404: bugs not found</div>
           </div>
         </div>
@@ -166,11 +222,33 @@ export const MangaSection = () => {
 
         <div className={styles.mRow}>
           <div className={`${styles.panel} ${styles.mPhoto}`}>
-            <img src={PHOTOS[3]} alt="фото 4" className={styles.panelImg} />
+            {!loadedImages[3] && (
+              <div className={styles.panelSkeleton}>
+                <Skeleton height="100%" />
+              </div>
+            )}
+            <img
+              src={PHOTOS[3]}
+              alt="фото 4"
+              className={styles.panelImg}
+              onLoad={() => handleImageLoad(3)}
+              style={{ opacity: loadedImages[3] ? 1 : 0 }}
+            />
             <div className={styles.panelBadge}>★</div>
           </div>
           <div className={`${styles.panel} ${styles.mPhoto}`}>
-            <img src={PHOTOS[4]} alt="фото 5" className={styles.panelImg} />
+            {!loadedImages[4] && (
+              <div className={styles.panelSkeleton}>
+                <Skeleton height="100%" />
+              </div>
+            )}
+            <img
+              src={PHOTOS[4]}
+              alt="фото 5"
+              className={styles.panelImg}
+              onLoad={() => handleImageLoad(4)}
+              style={{ opacity: loadedImages[4] ? 1 : 0 }}
+            />
             <div className={styles.panelCaption}>Enjoying life</div>
           </div>
           <div
@@ -205,14 +283,36 @@ export const MangaSection = () => {
             <p className={styles.sfx}>！！！</p>
           </div>
           <div className={`${styles.panel} ${styles.mPhoto} ${styles.mSpan2}`}>
-            <img src={PHOTOS[5]} alt="фото 6" className={styles.panelImg} />
+            {!loadedImages[5] && (
+              <div className={styles.panelSkeleton}>
+                <Skeleton height="100%" />
+              </div>
+            )}
+            <img
+              src={PHOTOS[5]}
+              alt="фото 6"
+              className={styles.panelImg}
+              onLoad={() => handleImageLoad(5)}
+              style={{ opacity: loadedImages[5] ? 1 : 0 }}
+            />
             <div className={styles.panelNum}>06</div>
           </div>
         </div>
 
         <div className={styles.mRow}>
           <div className={`${styles.panel} ${styles.mPhoto} ${styles.mTall}`}>
-            <img src={PHOTOS[6]} alt="фото 7" className={styles.panelImg} />
+            {!loadedImages[6] && (
+              <div className={styles.panelSkeleton}>
+                <Skeleton height="100%" />
+              </div>
+            )}
+            <img
+              src={PHOTOS[6]}
+              alt="фото 7"
+              className={styles.panelImg}
+              onLoad={() => handleImageLoad(6)}
+              style={{ opacity: loadedImages[6] ? 1 : 0 }}
+            />
             <div className={styles.panelNum}>07</div>
           </div>
           <div
@@ -235,7 +335,18 @@ export const MangaSection = () => {
         </div>
 
         <div className={`${styles.panel} ${styles.mEpilogue}`}>
-          <img src={PHOTOS[7]} alt="фото 8" className={styles.panelImg} />
+          {!loadedImages[7] && (
+            <div className={styles.panelSkeleton}>
+              <Skeleton height="100%" />
+            </div>
+          )}
+          <img
+            src={PHOTOS[7]}
+            alt="фото 8"
+            className={styles.panelImg}
+            onLoad={() => handleImageLoad(7)}
+            style={{ opacity: loadedImages[7] ? 1 : 0 }}
+          />
           <div className={styles.epilogueOverlay}>
             <p className={styles.epilogueText}>Продовження слідує...</p>
             <p className={styles.epilogueSub}>

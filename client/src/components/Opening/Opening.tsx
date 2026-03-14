@@ -73,7 +73,7 @@ export const Opening = ({ onDone, onAudioStart }: IAnimeOpeningProps) => {
     if (exiting) return;
 
     if (navigator.vibrate) {
-      navigator.vibrate(30);
+      navigator.vibrate([50, 30, 50]);
     }
 
     const nextStep = step + 1;

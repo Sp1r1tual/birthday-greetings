@@ -35,6 +35,12 @@
   transform: scale(1.04);
 }
 
+.panelSkeleton {
+  position: absolute;
+  inset: 0;
+  z-index: 5;
+}
+
 .panelCaption {
   position: absolute;
   bottom: 0;
@@ -87,6 +93,7 @@
   top: 28%;
   right: -6%;
   animation: floatBob 3s ease-in-out infinite;
+  will-change: transform;
 }
 .decorFloatBalloons {
   position: absolute;
@@ -97,6 +104,7 @@
   top: 62%;
   left: -5%;
   animation: floatBob 3.5s ease-in-out infinite reverse;
+  will-change: transform;
 }
 .decorFloatA {
   position: absolute;
@@ -107,6 +115,7 @@
   top: -3%;
   left: 28%;
   animation: floatBob 4s ease-in-out infinite;
+  will-change: transform;
 }
 .decorFloatB {
   position: absolute;
@@ -117,6 +126,7 @@
   top: -3%;
   right: 28%;
   animation: floatBob 4.5s ease-in-out infinite reverse;
+  will-change: transform;
 }
 .decorFloatC {
   position: absolute;
@@ -127,6 +137,7 @@
   bottom: 13.5%;
   left: 3%;
   animation: floatBob 3.8s ease-in-out infinite;
+  will-change: transform;
 }
 .decorFloatD {
   position: absolute;
@@ -142,6 +153,7 @@
   transition:
     transform 0.2s,
     filter 0.2s;
+  will-change: transform;
 }
 
 .dioActive {
@@ -705,16 +717,16 @@
     left: 10%;
   }
   .decorFloatD {
-    width: 115px;
+    width: 100px;
     top: 92%;
-    right: -1%;
+    right: -5%;
   }
   .epilogueOverlay {
     padding: 38px 28px 10px 28px;
     gap: 6px;
   }
   .dioCooldown {
-    bottom: -2.1%;
+    bottom: -1.2%;
   }
 }
 
@@ -789,7 +801,7 @@
   .decorFloatD {
     width: 95px;
     top: 92%;
-    right: -6%;
+    right: -7%;
   }
   .dioCooldown {
     bottom: -1.5%;

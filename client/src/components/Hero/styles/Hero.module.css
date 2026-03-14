@@ -39,7 +39,7 @@
 
 .hero {
   position: relative;
-  min-height: 100svh;
+  min-height: 100dvh;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -112,6 +112,7 @@
   );
   pointer-events: none;
   animation: spinRays 60s linear infinite;
+  will-change: transform;
 }
 
 @keyframes spinRays {
@@ -192,6 +193,12 @@
   filter: drop-shadow(0 6px 16px rgba(0, 0, 0, 0.6));
   margin-top: 8px;
 }
+.heroSkeleton {
+  width: 100%;
+  max-width: clamp(180px, 40vw, 320px);
+  aspect-ratio: 1024 / 1536;
+  margin: 8px auto 0;
+}
 
 @media (max-width: 768px) {
   .heroLine1 {
@@ -266,12 +273,12 @@
 
   .decorBalloons {
     width: clamp(40px, 12vw, 100px);
-    top: 19.5%;
+    top: 17.5%;
     left: 10%;
   }
   .decorPresent {
     width: clamp(40px, 12vw, 100px);
-    top: 19.5%;
+    top: 17.5%;
     right: 10%;
   }
 }

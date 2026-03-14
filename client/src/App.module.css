@@ -30,7 +30,7 @@
   background: var(--c-navy);
   color: var(--c-white);
   font-family: var(--font-body);
-  min-height: 100vh;
+  min-height: 100dvh;
   overflow-x: hidden;
   position: relative;
   width: 100%;

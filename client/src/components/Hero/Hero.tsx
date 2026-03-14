@@ -1,11 +1,17 @@
-import { useAudioContext } from "@/contexts/AudioContext";
+import { useState } from "react";
+import Skeleton from "react-loading-skeleton";
+import "react-loading-skeleton/dist/skeleton.css";
 
+import { useAudioContext } from "@/contexts/AudioContext";
 import { DECOR } from "@/common/constants/assets";
 
 import styles from "./styles/Hero.module.css";
 
 export const Hero = () => {
   const { isTimeStop } = useAudioContext();
+  const [isLoaded, setIsLoaded] = useState(false);
+
+  const bannerSrc = isTimeStop ? DECOR.easterEgg : DECOR.poster;
 
   return (
     <section className={styles.hero}>
@@ -33,12 +39,21 @@ export const Hero = () => {
         </h1>
         <p className={styles.heroSub}>
           Сьогодні свій день святкує особлива людина — і це зовсім не
-          перебільшення.
+          перебільшення
         </p>
+
+        {!isLoaded && (
+          <div className={styles.heroSkeleton}>
+            <Skeleton height="100%" />
+          </div>
+        )}
+
         <img
-          src={isTimeStop ? DECOR.easterEgg : DECOR.poster}
+          src={bannerSrc}
           className={styles.heroBannerImg}
           alt="Happy Birthday"
+          onLoad={() => setIsLoaded(true)}
+          style={{ display: isLoaded ? "block" : "none" }}
         />
       </div>
     </section>

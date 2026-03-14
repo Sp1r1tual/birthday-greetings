@@ -48,7 +48,7 @@ export const GreetingsSection = () => {
   }, [dispatch]);
 
   const handleSign = useCallback(async () => {
-    if (navigator.vibrate) navigator.vibrate(30);
+    if (navigator.vibrate) navigator.vibrate([50, 30, 50]);
 
     const trimmedName = name.trim();
     const trimmedCity = city.trim();

@@ -1,11 +1,21 @@
-import photo1 from "@/assets/photos/photo_2026-03-13_01-35-00.jpg";
-import photo2 from "@/assets/photos/photo_2026-03-13_01-35-05.jpg";
-import photo3 from "@/assets/photos/photo_2026-03-13_01-35-20.jpg";
-import photo4 from "@/assets/photos/photo_2026-03-13_01-35-28.jpg";
-import photo5 from "@/assets/photos/photo_2026-03-13_01-35-34.jpg";
-import photo6 from "@/assets/photos/photo_2026-03-13_01-35-40.jpg";
-import photo7 from "@/assets/photos/photo_2026-03-13_01-35-45.jpg";
-import photo8 from "@/assets/photos/photo_2026-03-13_01-36-00.jpg";
+const photo1 =
+  "https://res.cloudinary.com/dynnapuco/image/upload/v1773501274/photo_001_oy9tct.jpg";
+const photo2 =
+  "https://res.cloudinary.com/dynnapuco/image/upload/v1773500975/photo_002_mvdgse.jpg";
+const photo3 =
+  "https://res.cloudinary.com/dynnapuco/image/upload/v1773500978/photo_003_i2wunf.jpg";
+const photo4 =
+  "https://res.cloudinary.com/dynnapuco/image/upload/v1773500976/photo_004_laxiji.jpg";
+const photo5 =
+  "https://res.cloudinary.com/dynnapuco/image/upload/v1773500977/photo_005_es0kn9.jpg";
+const photo6 =
+  "https://res.cloudinary.com/dynnapuco/image/upload/v1773500976/photo_006_ze32pd.jpg";
+const photo7 =
+  "https://res.cloudinary.com/dynnapuco/image/upload/v1773500977/photo_007_fk0gdf.jpg";
+const photo8 =
+  "https://res.cloudinary.com/dynnapuco/image/upload/v1773500977/photo_009_yjku0t.jpg";
+const easterEggImg =
+  "https://res.cloudinary.com/dynnapuco/image/upload/v1773500986/photo_easter_egg_001_ule9lw.png";
 
 import decor1 from "@/assets/decorations/birthday_decoration_001.png";
 import decor2 from "@/assets/decorations/birthday_decoration_002.png";
@@ -15,7 +25,6 @@ import decor5 from "@/assets/decorations/birthday_decoration_005.png";
 import decor6 from "@/assets/decorations/birthday_decoration_006.png";
 import posterImg from "@/assets/decorations/birthday_poster_001.png";
 import emojiImg from "@/assets/decorations/birthday_emoji_001.png";
-import easterEggImg from "@/assets/photos/photo_easter_egg.png";
 
 export const PHOTOS = [
   photo1,
