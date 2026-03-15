@@ -1,31 +1,99 @@
 .footer {
   border-top: 3px solid var(--c-gold);
-  padding: 20px 24px;
+  padding: 24px;
   text-align: center;
+  background: var(--c-ink);
+}
+
+.topSection {
+  margin-bottom: 20px;
+}
+
+.footerSub {
+  font-family: var(--font-body);
+  font-size: 11px;
+  letter-spacing: 2px;
+  color: var(--c-gold);
+  opacity: 0.8;
+  text-transform: uppercase;
+  margin-bottom: 8px;
+}
+
+.chronicles {
   font-family: var(--font-title);
   font-size: 13px;
   letter-spacing: 3px;
   color: rgba(245, 240, 232, 0.5);
-  background: var(--c-ink);
+  margin: 0;
 }
 
-.footerSub {
-  margin-top: 6px;
-  font-family: var(--font-body);
-  font-size: 11px;
-  letter-spacing: 1px;
-  color: var(--c-gold);
-  opacity: 0.6;
-  position: absolute;
-  left: 50%;
-  transform: translateX(-50%);
-}
-
-.linksWrapper {
+.bottomSection {
+  border-top: 1px solid rgba(212, 160, 23, 0.3); /* Soft gold separator */
+  padding-top: 20px;
   display: flex;
   justify-content: space-between;
   align-items: center;
   width: 100%;
+}
+
+.contactWrapper {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 8px;
+}
+
+.contactTitle {
+  font-family: var(--font-body);
+  font-size: 11px;
+  letter-spacing: 1px;
+  color: var(--c-gold);
+  opacity: 0.8;
+  margin: 0;
+}
+
+.contactIcons {
+  display: flex;
+  gap: 20px;
+  align-items: center;
+}
+
+.contactLink {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  text-decoration: none;
+  transition: transform 0.2s ease;
+}
+
+.contactLink:hover {
+  transform: translateY(-2px);
+}
+
+.contactName {
+  font-family: var(--font-body);
+  font-size: 10px;
+  letter-spacing: 1px;
+  color: var(--c-gold);
+  font-weight: 700;
+  text-transform: uppercase;
+}
+
+.icon {
+  width: 22px;
+  height: 22px;
+  transition:
+    transform 0.2s ease,
+    opacity 0.2s ease;
+}
+
+.contactLink:hover .icon {
+  transform: scale(1.1);
+  opacity: 1;
+}
+
+.contactLink:hover .contactName {
+  text-decoration: underline;
 }
 
 .footerLink {
@@ -34,31 +102,27 @@
   font-size: 11px;
   letter-spacing: 1px;
   color: var(--c-gold);
-  position: absolute;
-  right: 25px;
   font-weight: 600;
+  transition: opacity 0.2s ease;
 }
 
 .footerLink:hover {
   text-decoration: underline;
+  opacity: 1;
 }
 
-@media (max-width: 480px) {
-  .linksWrapper {
+@media (max-width: 768px) {
+  .bottomSection {
     flex-direction: column;
+    gap: 24px;
     align-items: center;
-    position: static;
   }
+
+  .contactWrapper {
+    align-items: center;
+  }
+
   .footerSub {
-    order: 2;
-    position: static;
-    transform: none;
-    margin: 6px 0;
-  }
-  .footerLink {
-    order: 1;
-    position: static;
-    transform: none;
-    margin: 6px 0;
+    font-size: 9px;
   }
 }

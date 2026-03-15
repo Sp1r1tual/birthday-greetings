@@ -33,9 +33,9 @@
 
 @media (max-width: 480px) {
   .muteBtn {
-    width: 25px;
-    height: 25px;
-    font-size: 15px;
+    width: 36px;
+    height: 36px;
+    font-size: 18px;
   }
 }
 

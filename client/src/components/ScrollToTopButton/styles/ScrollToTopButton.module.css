@@ -1,6 +1,6 @@
 .toTopBtn {
   position: fixed;
-  bottom: max(24px, env(safe-area-inset-bottom));
+  bottom: calc(max(24px, env(safe-area-inset-bottom)) + var(--footer-offset, 0px));
   right: max(16px, env(safe-area-inset-right));
   z-index: 500;
   width: 44px;
@@ -25,15 +25,18 @@
     box-shadow 0.1s,
     background 0.2s;
 }
+
 .toTopBtnVisible {
   opacity: 1;
   pointer-events: auto;
 }
+
 .toTopBtn:hover {
   background: rgba(13, 27, 62, 0.95);
   transform: translate(-1px, -1px);
   box-shadow: 4px 4px 0 var(--c-ink);
 }
+
 .toTopBtn:active {
   transform: translate(2px, 2px);
   box-shadow: 1px 1px 0 var(--c-ink);
@@ -41,9 +44,8 @@
 
 @media (max-width: 480px) {
   .toTopBtn {
-    width: 25px;
-    height: 25px;
-    font-size: 14px;
-    bottom: 16px;
+    width: 36px;
+    height: 36px;
+    font-size: 18px;
   }
 }
