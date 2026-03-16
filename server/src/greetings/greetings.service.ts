@@ -1,9 +1,13 @@
-import { Injectable, NotFoundException } from '@nestjs/common';
+import { Injectable } from '@nestjs/common';
 import { InjectModel } from '@nestjs/mongoose';
 import { Model } from 'mongoose';
 
 import { Greeting, GreetingDocument } from './schemas/greeting.schema';
 import { CreateGreetingDto } from './dto/create-greeting.dto';
+import {
+  HARDCODED_IDS,
+  HARDCODED_GREETINGS,
+} from 'src/common/db-dumps/greetings_16_03_2026';
 
 @Injectable()
 export class GreetingsService {
@@ -12,17 +16,18 @@ export class GreetingsService {
     private readonly greetingModel: Model<GreetingDocument>,
   ) {}
 
-  async findAllGreetings(): Promise<GreetingDocument[]> {
-    const greetings = await this.greetingModel
-      .find()
-      .sort({ createdAt: -1 })
-      .exec();
+  async findAllGreetings() {
+    try {
+      const newFromDb = await this.greetingModel
+        .find({ _id: { $nin: Array.from(HARDCODED_IDS) } })
+        .sort({ createdAt: 1 })
+        .lean()
+        .exec();
 
-    if (greetings.length === 0) {
-      throw new NotFoundException('No records found');
+      return [...HARDCODED_GREETINGS, ...newFromDb];
+    } catch {
+      return HARDCODED_GREETINGS;
     }
-
-    return greetings;
   }
 
   async createGreeting(dto: CreateGreetingDto): Promise<GreetingDocument> {
