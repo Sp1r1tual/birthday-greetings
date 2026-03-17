@@ -28,6 +28,7 @@ You can order a similar personalized greeting by sending an email to: [andrii038
 - Theme
 - Text
 - Photos
+- Good mood
 
 ---
 
@@ -60,6 +61,80 @@ You can order a similar personalized greeting by sending an email to: [andrii038
 - **NestJS** – Robust, scalable Node.js framework.
 - **MongoDB (Mongoose)** – Flexible data storage for greetings.
 - **Zod** – Schema-based validation for API and environment.
+
+---
+
+## Local Development Setup
+
+### 1. Clone the repository
+
+```bash
+git clone https://github.com/Sp1r1tual/birthday-greetings.git
+```
+
+### Server
+
+### 2. Navigate to server directory
+
+```bash
+cd server
+```
+
+### 3. Install dependencies
+
+```bash
+yarn install
+```
+
+### 4. Configure environment variables
+
+Copy `.env.example` to `.env` and fill in the values:
+
+```dotenv
+PORT=5000
+CLIENT_URL=http://localhost:5173
+
+# MongoDB connection string (local or Atlas)
+DB_URL=mongodb://localhost:27017/birthday-greetings
+```
+
+### 5. Start the server
+
+```bash
+yarn dev
+```
+
+The server will be available at `http://localhost:5000`.
+
+### Client
+
+### 6. Create a new terminal and navigate to client directory
+
+```bash
+cd client
+```
+
+### 7. Install dependencies
+
+```bash
+yarn install
+```
+
+### 8. Configure environment variables
+
+Copy `.env.example` to `.env` and fill in the values:
+
+```dotenv
+VITE_API_URL=http://localhost:5000
+```
+
+### 9. Start the client
+
+```bash
+yarn dev
+```
+
+The client will be available at `http://localhost:5173`.
 
 ---
 
