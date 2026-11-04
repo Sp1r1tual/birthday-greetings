@@ -10,6 +10,7 @@ import {
   selectIsSending,
   selectGreetingsError,
   selectIsLoading,
+  selectIsFallback,
 } from "@/store/greetings/selectors";
 
 import { formatGreetingsTime } from "@/common/utils/formatGreetingsTime";
@@ -25,12 +26,15 @@ export const GreetingsSection = () => {
   const signatures = useAppSelector(selectGreetings);
   const isLoading = useAppSelector(selectIsLoading);
   const isSending = useAppSelector(selectIsSending);
+  const isFallback = useAppSelector(selectIsFallback);
   const serverError = useAppSelector(selectGreetingsError);
 
   const [newSigId, setNewSigId] = useState<string | null>(null);
 
   const timerRef = useRef<ReturnType<typeof setTimeout> | null>(null);
   const sigsEndRef = useRef<HTMLDivElement | null>(null);
+  const sectionRef = useRef<HTMLElement | null>(null);
+  const alertShownRef = useRef(false);
 
   useEffect(() => {
     dispatch(fetchGreetings());
@@ -38,6 +42,25 @@ export const GreetingsSection = () => {
       if (timerRef.current) clearTimeout(timerRef.current);
     };
   }, [dispatch]);
+
+  // Алерт про відключену БД — лише коли секція потрапила в поле зору
+  useEffect(() => {
+    const el = sectionRef.current;
+    if (!isFallback || alertShownRef.current || !el) return;
+
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        if (entry.isIntersecting && !alertShownRef.current) {
+          alertShownRef.current = true;
+          observer.disconnect();
+          alert(CONTENT.GREETINGS.DB_OFFLINE_ALERT);
+        }
+      },
+      { threshold: 0.3 },
+    );
+    observer.observe(el);
+    return () => observer.disconnect();
+  }, [isFallback]);
 
   const handleSuccess = useCallback(
     (id: string) => {
@@ -53,7 +76,7 @@ export const GreetingsSection = () => {
   );
 
   return (
-    <section className={styles.greetingsSection}>
+    <section ref={sectionRef} className={styles.greetingsSection}>
       <div className={styles.sectionLabel}>{CONTENT.GREETINGS.SECTION_LABEL}</div>
 
       <div className={styles.greetingsBox}>

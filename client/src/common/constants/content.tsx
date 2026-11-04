@@ -63,6 +63,8 @@ export const CONTENT = {
       SENDING_BTN: "Надсилання...",
     },
     COUNT_LOADING: "Йде завантаження...",
+    DB_OFFLINE_ALERT:
+      "База даних відключена, тому показано збережені побажання. Нові надіслати поки неможливо.",
   },
   FOOTER: {
     CHRONICLES: "BIRTHDAY CHRONICLES · VOL.1 · СПЕЦІАЛЬНИЙ ВИПУСК",

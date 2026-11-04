@@ -9,6 +9,7 @@ interface IGreetingsState {
   items: IGreetingResponse[];
   isLoading: boolean;
   isSending: boolean;
+  isFallback: boolean;
   error: string | null;
 }
 
@@ -16,6 +17,7 @@ const initialState: IGreetingsState = {
   items: [],
   isLoading: false,
   isSending: false,
+  isFallback: false,
   error: null,
 };
 
@@ -38,7 +40,8 @@ const greetingsSlice = createSlice({
       })
       .addCase(fetchGreetings.fulfilled, (state, action) => {
         state.isLoading = false;
-        state.items = action.payload;
+        state.items = action.payload.items;
+        state.isFallback = action.payload.isFallback;
       })
       .addCase(fetchGreetings.rejected, (state, action) => {
         state.isLoading = false;

@@ -12,7 +12,7 @@ export const fetchGreetings = createAsyncThunk(
       return await GreetingsService.getGreetings();
     } catch (error) {
       if (axios.isAxiosError(error) && error.response?.status === 404) {
-        return [];
+        return { items: [] as IGreetingResponse[], isFallback: false };
       }
       return rejectWithValue("Не вдалося завантажити побажання");
     }
