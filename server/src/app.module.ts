@@ -16,6 +16,11 @@ import { validateEnv } from './common/configs/env.validation.js';
       inject: [ConfigService],
       useFactory: (config: ConfigService) => ({
         uri: config.get<string>('DB_URL'),
+        // Не блокуємо старт застосунку, якщо кластер недоступний —
+        // тоді findAllGreetings віддасть захардкоджений дамп.
+        lazyConnection: true,
+        serverSelectionTimeoutMS: 3000,
+        bufferTimeoutMS: 3000,
       }),
     }),
     ThrottlerModule.forRoot([{ ttl: 60000, limit: 20 }]),

@@ -1,4 +1,4 @@
-import { Injectable } from '@nestjs/common';
+import { Injectable, Logger } from '@nestjs/common';
 import { InjectModel } from '@nestjs/mongoose';
 import { Model } from 'mongoose';
 
@@ -11,6 +11,8 @@ import {
 
 @Injectable()
 export class GreetingsService {
+  private readonly logger = new Logger(GreetingsService.name);
+
   constructor(
     @InjectModel(Greeting.name)
     private readonly greetingModel: Model<GreetingDocument>,
@@ -24,9 +26,13 @@ export class GreetingsService {
         .lean()
         .exec();
 
-      return [...HARDCODED_GREETINGS, ...newFromDb];
-    } catch {
-      return HARDCODED_GREETINGS;
+      return {
+        greetings: [...HARDCODED_GREETINGS, ...newFromDb],
+        isFallback: false,
+      };
+    } catch (error) {
+      this.logger.warn(`DB недоступна, віддаю дамп: ${String(error)}`);
+      return { greetings: HARDCODED_GREETINGS, isFallback: true };
     }
   }
 

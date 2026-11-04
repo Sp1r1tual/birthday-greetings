@@ -12,8 +12,9 @@ export class GreetingsController {
 
   @Get()
   async findAll() {
-    const greetings = await this.greetingsService.findAllGreetings();
-    return { Greetings: greetings };
+    const { greetings, isFallback } =
+      await this.greetingsService.findAllGreetings();
+    return { Greetings: greetings, IsFallback: isFallback };
   }
 
   @Post()
